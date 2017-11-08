@@ -1,0 +1,9 @@
+:host {
+    color:red;
+    font-size: 10px;
+    font-family: sans-serif;
+}
+
+:host-context(.customIf) p {
+    color:green;
+}

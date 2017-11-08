@@ -1,0 +1,6 @@
+<button type="button" (click)="getAllUsers()">Get All Countries via GET</button>
+<ng-container *ngIf="allUsers!=undefined">
+  <ul>
+    <li *ngFor="let user of allUsers">{{user.userId}}</li>
+  </ul>
+</ng-container>

@@ -1,0 +1,77 @@
+<a routerLink='form' routerLinkActive="active">form</a>
+<router-outlet></router-outlet>
+<button type="button" (click)="showForm()">Show Form</button>
+<div *ngIf="formVisible">
+  <sign-up-form></sign-up-form>
+</div>
+<http-services></http-services>
+<div *ngIf="!formVisible">
+<div class="customIf">
+  <h1>
+    Revising all the concepts learnt in AngularJS 2.0 till date
+  </h1>
+  <!--Working with PIPES-->
+  <h2>Using PIPES and ngModel</h2>
+  <div >
+    <label for="baseVal">Please enter Base Value</label>
+    <input [(ngModel)]='base' name="baseVal" />
+    <label for="expVal">Please enter the Exponent Value</label>
+    <input [(ngModel)]='exponent' name="expVal" />
+    <label for="exp2Val">Please enter the Second Exponent Value</label>
+    <input [(ngModel)]='exponent2' name="exp2Val" />
+    <p>{{base|pipeSQRT:exponent:exponent2|pipeOutputSQRT}}</p>
+    <p>AsyncPipe example</p>
+    <p>Displaying after every 1 second {{messages$|async}}</p>
+  </div>
+  <!--------------------------------------------------------->
+  <!--Working with Structural Directives-->
+  <div>
+    <h2>Using Structural Directives</h2>
+    <h3>Using *ngIf</h3>
+    <p>In The above Mathematical Operation enter values such that the result is greater than or equal to 8</p>
+    <ng-container *ngIf="(base|pipeSQRT:exponent:exponent2)>=8">
+      <p>The Mathematical Operation above yielded a value greater than 8</p>
+    </ng-container>
+    <h3>Using *ngFor
+      <!--TODO:: Use trackBy function here-->
+      <ng-container *ngFor="let message of messages ;let i=index">
+        <div>{{i}} :: {{message}}</div>
+      </ng-container>
+    </h3>
+    <h3>Using *ngSwitch</h3>
+    <label for="emoticonInput">Are you feeling sad?happy?angry? Type in</label>
+    <input [(ngModel)]='emoticon' name="emoticonInput" />
+    <!--Below ngSwitch is not a Structural Drective.It is a Attribute Directive-->
+    <ng-container [ngSwitch]="emoticon">
+      <!--ngSwitchCase and ngSwitchDefault are a Structiral Directive-->
+      <switch-case-angry *ngSwitchCase="'angry'"></switch-case-angry>
+      <!--For *ngSwitchCase="'angry'"  ,  switch-case-angr is the host  -->
+      <switch-case-sad *ngSwitchCase="'sad'"></switch-case-sad>
+      <switch-case-happy *ngSwitchCase="'happy'"></switch-case-happy>
+      <switch-case-default *ngSwitchDefault></switch-case-default>
+    </ng-container>
+    <!--Custom Structural Directives-->
+    <h3>Using Custom Directive</h3>
+    <button (click)="reverseDisplay()">Reverse Display</button>
+    <div *myReverseIf="isVisible" class="customIf">
+      Custom Directive
+    </div>
+  </div>
+  <!-------------------------------------------------------------------->
+  <div>
+    Attribute Directive<br>
+    <input [(ngModel)]="color" />
+    <span myAtrributeDirective style="color:red" [defaultColor]="'rgba(255,0,100,.3)'" [backColor]="color">Check my color !!</span>
+  </div>
+  <!---------------------------------------------------------->
+<!--Animations-->
+<h3>Working on Animations</h3>
+<button [@animateMe]="toggle" (click)="toggleButton()">Animate Me</button>
+<ul>
+  <li *ngFor="let message of messages" [@removeLI]="toggle">
+    {{message}}
+  </li>
+</ul>
+<button (click)="removeMessage()">Remove Message</button>
+</div>
+</div>
